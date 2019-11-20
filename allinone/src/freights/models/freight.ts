@@ -1,5 +1,5 @@
-export class MyRow {
-    Id : string;
+export class Freight {
+    Id : number;
     Name: string;
     Description: string;
     ValidTo: Date;

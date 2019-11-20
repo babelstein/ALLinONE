@@ -1,0 +1,11 @@
+<div *ngIf="freight">
+    <h2>{{freight.Name | titlecase }}</h2>
+    <p>{{freight.Description}}</p>
+    <p>{{freight.ValidTo | date:'dd-MM-yyyy'}}</p>
+    
+    <h2>Edit</h2>
+    <input [(ngModel)]="freight.Name" placeholder="Enter name..." />
+    <input [(ngModel)]="freight.Description" placeholder="Enter decription..." />
+    
+    <button (click)=saveFreight()>Save changes</button>
+</div>

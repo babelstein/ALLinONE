@@ -3,22 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RowDetailsComponent } from './row-details/row-details.component';
-import { FormsModule } from '@angular/forms';
-import { RowListComponent } from './row-list/row-list.component';
+import { Error404Component } from 'src/errors/404.component';
+import { NavbarComponent } from 'src/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RowDetailsComponent,
-    RowListComponent
+    Error404Component,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
