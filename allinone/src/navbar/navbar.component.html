@@ -1,5 +1,7 @@
 <nav>
     <a>Home</a>
     <a [routerLink]="['freights']" >Freights</a>
-    <a [routerLink]="['user','login']" >Login</a>
+    <a [hidden]="isAuthorized()" [routerLink]="['user','login']" >Login</a>
+    <a [hidden]="!isAuthorized()" [routerLink]="['user','details']" >Hello {{getUserName()}}!</a>
+    <a [hidden]="!isAuthorized()" (click)="logout()">Logout</a>
 </nav>
