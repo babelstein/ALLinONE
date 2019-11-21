@@ -1,7 +1,7 @@
 <form [formGroup]="loginFormGroup" (ngSubmit)="login()">
-    <input name="login" type="text" placeholder="Username" formControlName="login">
-    <input name="password" type="password" placeholder="Password" formControlName="password">
-
+    <input name="login" type="text" placeholder="Username" formControlName="login" [ngClass]="{'error': isLoginFieldInvalid()}">
+    <input name="password" type="password" placeholder="Password" formControlName="password" [ngClass]="{'error': isPasswordFieldInvalid()}">
+    <span *ngIf="invalidCredentials">Invalid credentials!</span>
     <button type="submit">Login</button>
     <button type="button" (click)="cancel()">Cancel</button>
 </form>
