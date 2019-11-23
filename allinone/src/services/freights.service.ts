@@ -25,6 +25,18 @@ export class FreightsService {
       Description: "Third row from collection",
       Name: "Row #3",
       ValidTo: new Date(2025, 7, 16)
+    },
+    {
+      Id: 4,
+      Description: "Name it as you want",
+      Name: "Another freight",
+      ValidTo: new Date(2025, 7, 16)
+    },
+    {
+      Id: 5,
+      Description: "I'm runing out of description ideas ;)",
+      Name: "Yet another freight!",
+      ValidTo: new Date(2025, 7, 16)
     }
   ]
 

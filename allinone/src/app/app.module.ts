@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { Error404Component } from 'src/errors/404.component';
 import { NavbarComponent } from 'src/navbar/navbar.component';
 import { AuthService } from 'src/services/auth.service';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AuthService } from 'src/services/auth.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
     AuthService

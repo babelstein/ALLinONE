@@ -1,8 +1,10 @@
-<ul>
-  <li *ngFor="let freight of freights">
-    <h2>{{freight.Name | titlecase }}</h2>
-    <p>{{freight.Description}}</p>
-    <p>{{freight.ValidTo | date:'dd-MM-yyyy'}}</p>
-    <button [routerLink]="[freight.Id]">Edit</button>
-  </li>
-</ul>
+<div class="container">
+  <div class="row">
+    <div class="col-4" *ngFor="let freight of freights">
+      <h2>{{freight.Name | titlecase }}</h2>
+      <p>{{freight.Description}}</p>
+      <p>{{freight.ValidTo | date:'dd-MM-yyyy'}}</p>
+      <button type="button" mdbBtn color="primary" class="btn blue-gradient btn-sm btn-block"  mdbWavesEffect [routerLink]="[freight.Id]" >Edit</button>
+    </div>
+  </div>
+</div>

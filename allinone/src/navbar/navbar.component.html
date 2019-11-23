@@ -1,7 +1,37 @@
-<nav>
-    <a>Home</a>
-    <a [routerLink]="['freights']" >Freights</a>
-    <a [hidden]="isAuthorized()" [routerLink]="['user','login']" >Login</a>
-    <a [hidden]="!isAuthorized()" [routerLink]="['user','details']" >Hello {{getUserName()}}!</a>
-    <a [hidden]="!isAuthorized()" (click)="logout()">Logout</a>
-</nav>
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark orange ie-nav" [containerInside]="false">
+    <mdb-navbar-brand>
+        <a class="logo navbar-brand" [routerLink]="['']"><strong>Put logo here</strong></a>
+    </mdb-navbar-brand>
+    <links>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active waves-light" mdbWavesEffect>
+                <a class="nav-link">Home</a>
+            </li>
+            <li class="nav-item waves-light" mdbWavesEffect>
+                <a class="nav-link" [routerLink]="['freights']">Freights</a>
+            </li>
+        </ul>
+
+
+        <ul class="navbar-nav nav-flex-icons">
+            <li [hidden]="isAuthorized()" class="nav-item">
+                <a class="nav-link" [routerLink]="['user','login']">
+                    <mdb-icon fas icon="key"></mdb-icon>Login
+                </a>
+            </li>
+            <li [hidden]="!isAuthorized()" class="nav-item">
+                <a class="nav-link">
+                    <div class="btn-group" mdbDropdown mdbDropdownToggle>
+                        <mdb-icon fas icon="user"></mdb-icon>
+                        Hello {{getUserName()}}!
+                        <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+                            <a class="dropdown-item" [routerLink]="['user','details']">Account details</a>
+                            <div class="divider dropdown-divider"></div>
+                            <a class="dropdown-item" (click)="logout()">Logout</a>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </links>
+</mdb-navbar>

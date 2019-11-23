@@ -1,7 +1,18 @@
-<form [formGroup]="loginFormGroup" (ngSubmit)="login()">
-    <input name="login" type="text" placeholder="Username" formControlName="login" [ngClass]="{'error': isLoginFieldInvalid()}">
-    <input name="password" type="password" placeholder="Password" formControlName="password" [ngClass]="{'error': isPasswordFieldInvalid()}">
-    <span *ngIf="invalidCredentials">Invalid credentials!</span>
-    <button type="submit">Login</button>
-    <button type="button" (click)="cancel()">Cancel</button>
-</form>
+<div class="container">
+        <h1>Sign in</h1>
+        <div class="d-flex justify-content-center">
+                <form class="text-center border border-light p-5 col-sm-8 " [formGroup]="loginFormGroup"
+                        (ngSubmit)="login()">
+                        <input class="form-control mb-4" name="login" type="text" placeholder="Username"
+                                formControlName="login" [ngClass]="{'error': isLoginFieldInvalid()}">
+                        <input class="form-control mb-4" name="password" type="password" placeholder="Password"
+                                formControlName="password" [ngClass]="{'error': isPasswordFieldInvalid()}">
+
+                        <span *ngIf="invalidCredentials">Invalid credentials!</span>
+                        <button mdbBtn class="btn blue-gradient" gradient="peach" rounded="true" mdbWavesEffect
+                                type="submit">Login</button>
+                        <button mdbBtn class="btn blue-gradient" gradient="peach" rounded="true" mdbWavesEffect
+                                type="button" (click)="cancel()">Cancel</button>
+                </form>
+        </div>
+</div>
