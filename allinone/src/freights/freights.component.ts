@@ -12,11 +12,11 @@ export class FreightsComponent {
     public freights : Freight[];
     public selectedFreight: Freight;
     constructor(private freightsService : FreightsService){
-      console.log('%cListComponent - created', 'color: red');
+      console.log('%cFreightsComponent - created', 'color: red');
     }
 
     ngOnInit(){
-      console.log('%cListComponent - initialized', 'color: yellow');
+      console.log('%cFreightsComponent - initialized', 'color: yellow');
       this.freightsService.getRows().subscribe((freights) => {this.freights = freights;});
     }
   

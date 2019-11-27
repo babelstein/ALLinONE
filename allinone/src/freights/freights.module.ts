@@ -11,7 +11,7 @@ import { FreightsRouteActivator } from 'src/Services/freights-route-activator.se
     declarations: [    
         FreightsComponent,
         FreightDetailsComponent,
-        FreightListComponent
+        FreightListComponent,
     ],
     imports: [
         FormsModule,

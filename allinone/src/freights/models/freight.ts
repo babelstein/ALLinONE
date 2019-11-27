@@ -3,4 +3,5 @@ export class Freight {
     Name: string;
     Description: string;
     ValidTo: Date;
+    HideExtras: boolean = true;
 }

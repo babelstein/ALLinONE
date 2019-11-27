@@ -10,10 +10,14 @@ export class FreightListComponent implements OnInit {
   @Output() freightSelectedEvent = new EventEmitter<Freight>();
 
   constructor(){
-    console.log('%cRowListComponent - created', 'color: red');
+    console.log('%cFreightListComponent - created', 'color: red');
   }
 
   ngOnInit() {
-    console.log('%cRowListComponent - initialized', 'color: yellow');
+    console.log('%cFreightListComponent - initialized', 'color: yellow');
+  }
+
+  getFreightListHeaders(){
+    return Object.getOwnPropertyNames(this.freights[0]);
   }
 }
