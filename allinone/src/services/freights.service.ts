@@ -12,36 +12,31 @@ export class FreightsService {
       Id: 1,
       Description: "First row from collection",
       Name: "Row #1",
-      ValidTo: new Date(2019, 12, 20),
-      HideExtras: true
+      ValidTo: new Date(2019, 12, 20)
     },
     {
       Id: 2,
       Description: "Second row from collection",
       Name: "Row #2",
-      ValidTo: new Date(2010, 1, 5),
-      HideExtras: true
+      ValidTo: new Date(2010, 1, 5)
     },
     {
       Id: 3,
       Description: "Third row from collection",
       Name: "Row #3",
-      ValidTo: new Date(2025, 7, 16),
-      HideExtras: true
+      ValidTo: new Date(2025, 7, 16)
     },
     {
       Id: 4,
       Description: "Name it as you want",
       Name: "Another freight",
-      ValidTo: new Date(2025, 7, 16),
-      HideExtras: true
+      ValidTo: new Date(2025, 7, 16)
     },
     {
       Id: 5,
       Description: "I'm runing out of description ideas ;)",
       Name: "Yet another freight!",
-      ValidTo: new Date(2025, 7, 16),
-      HideExtras: true
+      ValidTo: new Date(2025, 7, 16)
     }
   ]
 

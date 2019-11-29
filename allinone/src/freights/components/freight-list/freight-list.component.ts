@@ -16,8 +16,4 @@ export class FreightListComponent implements OnInit {
   ngOnInit() {
     console.log('%cFreightListComponent - initialized', 'color: yellow');
   }
-
-  getFreightListHeaders(){
-    return Object.getOwnPropertyNames(this.freights[0]);
-  }
 }

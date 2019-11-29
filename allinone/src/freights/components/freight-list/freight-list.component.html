@@ -6,28 +6,45 @@
         <th>Description</th>
       </tr>
     </thead>
-    <tbody *ngFor="let freight of freights" >
-          <ng-container *ngTemplateOutlet="basic;context:{freight:freight}"></ng-container>
-          <ng-container *ngTemplateOutlet="details;context:{freight:freight}"></ng-container>
+    <tbody>
+      <!-- <ng-container *ngTemplateOutlet="rowTemplate;context:{freights:freights,$implicit:true}"></ng-container> -->
+      <ng-template ngFor let-freight [ngForOf]="freights">
+        <tr>
+          <td>{{freight.Name}}</td>
+          <td>{{freight.Description}}</td>
+          <td><button type="button" class="btn blue-gradient btn-sm btn-block"
+              (click)="freight.hide = !freight.hide">{{!!freight.hide ? "hide details" : "show details"}}</button>
+          </td>
+        </tr>
+        <tr [hidden]="freight.hide">
+          <div>
+            Id: <p>{{freight.Id}}</p>
+            Valid To: <p>{{freight.ValidTo | date:'dd-MM-yyyy'}}</p>
+            <button type="button" mdbBtn color="primary" class="btn blue-gradient btn-sm btn-block" mdbWavesEffect
+              [routerLink]="[freight.Id]">Edit</button>
+          </div>
+        </tr>
+      </ng-template>
     </tbody>
   </table>
 </div>
-
-<ng-template #basic let-freight="freight">
-  <tr>
+<!-- 
+<ng-template #rowTemplate let-freights="freights">
+  <ng-template ngFor let-freight [ngForOf]="freights" let-hide>
+    <tr>
       <td>{{freight.Name}}</td>
       <td>{{freight.Description}}</td>
-      <td><button type="button" class="btn blue-gradient btn-sm btn-block" (click)="freight.HideExtras = !freight.HideExtras">{{freight.HideExtras ? "show details" : "hide details"}}</button></td>
-  </tr>
-</ng-template>
-
-<ng-template #details let-freight="freight" let-hide="hideExtras">
-    <tr [hidden]="freight.HideExtras">
+      <td><button type="button" class="btn blue-gradient btn-sm btn-block"
+          (click)="hide = !hide">{{hide ? "show details" : "hide details"}}</button>
+      </td>
+    </tr>
+    <tr [hidden]="hide">
       <div>
-          Id: <p>{{freight.Id}}</p>
-          Valid To: <p>{{freight.ValidTo | date:'dd-MM-yyyy'}}</p>
-          <button type="button" mdbBtn color="primary" class="btn blue-gradient btn-sm btn-block" mdbWavesEffect
-            [routerLink]="[freight.Id]">Edit</button>
+        Id: <p>{{freight.Id}}</p>
+        Valid To: <p>{{freight.ValidTo | date:'dd-MM-yyyy'}}</p>
+        <button type="button" mdbBtn color="primary" class="btn blue-gradient btn-sm btn-block" mdbWavesEffect
+          [routerLink]="[freight.Id]">Edit</button>
       </div>
     </tr>
-</ng-template>
+  </ng-template>
+</ng-template> -->
