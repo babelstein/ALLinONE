@@ -8,7 +8,6 @@ export class FreightTypePipe implements PipeTransform {
         switch (value) {
             case (FreightType.Cooler):
                 return 'Cooler'
-                break;
             case (FreightType.Curtainsider):
                 return 'Curtainsider';
             case (FreightType.DumpTruck):
@@ -20,5 +19,4 @@ export class FreightTypePipe implements PipeTransform {
             default: FreightType[value].toString();
         }
     }
-
 }

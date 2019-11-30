@@ -7,6 +7,9 @@ import { Error404Component } from 'src/errors/404.component';
 import { NavbarComponent } from 'src/navbar/navbar.component';
 import { AuthService } from 'src/services/auth.service';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { TOASTR_TOKEN, IToastr } from 'src/shared/toastr.service';
+
+let toastr: IToastr = window['toastr'];
 
 @NgModule({
   declarations: [
@@ -20,8 +23,9 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     MDBBootstrapModule.forRoot()
   ],
   providers: [
-    AuthService
+    AuthService,
+    { provide: TOASTR_TOKEN, useValue: toastr }
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
