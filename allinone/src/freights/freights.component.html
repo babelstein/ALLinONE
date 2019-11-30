@@ -1,1 +1,20 @@
-<freight-list [freights]="freights" (freightSelectedEvent)="selectedFreight = $event"></freight-list>
+<div class="container">
+    <div class="filters">
+        <div class="btn-group" mdbDropdown>
+            <button mdbDropdownToggle type="button" size="sm" mdbBtn color="primary" class="dropdown-toggle waves-light"
+                mdbWavesEffect>
+                Filters
+            </button>
+            <div class="dropdown-menu dropdown-primary">
+                <ng-template ngFor let-freightType [ngForOf]="freightTypes()">
+                    <mdb-checkbox [checked]="freightTypeFilters.includes(freightType)" [default]="true"
+                        (change)="$event.checked ? addFreightTypeFilter(freightType) : removeFreightTypeFilter(freightType)">
+                        {{freightType | freightType}}</mdb-checkbox>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+
+<freight-list [freights]="freights" [filterType]="freightTypeFilters" (freightSelectedEvent)="selectedFreight = $event">
+</freight-list>
