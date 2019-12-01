@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FreightsComponent } from './freights.component';
-import { FreightDetailsComponent } from './Components/freight-details/freight-details.component';
-import { FreightsRouteActivator } from '../Services/freights-route-activator.service';
+import { FreightDetailsComponent } from './components/freight-details/freight-details.component';
+import { FreightExistsRouteActivator, CanEditFreightRouteActivator } from '../services/freights-route-activator.service';
 
 const routes : Routes = [
     {
@@ -12,7 +12,7 @@ const routes : Routes = [
     {
         path: ':id',
         component: FreightDetailsComponent,
-        canActivate: [FreightsRouteActivator]
+        canActivate: [FreightExistsRouteActivator,CanEditFreightRouteActivator]
     }
 ]
 

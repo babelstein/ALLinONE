@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FreightsService } from 'src/Services/freights.service';
-import { Freight } from '../../Models/freight';
+import { FreightsService } from 'src/services/freights.service';
+import { Freight } from '../../models/freight';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -21,7 +21,7 @@ export class FreightDetailsComponent implements OnInit {
   ngOnInit(){
     console.log('%cRowDetailsComponent - initialized' , 'color: yellow');
     let rowId = +this.route.snapshot.params['id'];
-    this.freightService.getRow(rowId).subscribe((freight) => {this.freight = freight});
+    this.freightService.Get(rowId).subscribe((freight) => {this.freight = freight});
   }
 
   public saveFreight(){

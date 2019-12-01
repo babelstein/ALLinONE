@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
-import { Freight } from '../../Models/freight';
-import { FreightType } from 'src/freights/Models/freightType';
+import { Freight } from '../../models/freight';
+import { FreightType } from 'src/freights/models/freightType';
+import { AuthService } from 'src/services/auth.service';
 
 @Component({
   selector: 'freight-list',
@@ -12,7 +13,7 @@ export class FreightListComponent implements OnInit, OnChanges {
   @Output() freightSelectedEvent = new EventEmitter<Freight>();
   resultFreights : Freight[] = [];
 
-  constructor(){
+  constructor(private authService: AuthService){
     console.log('%cFreightListComponent - created', 'color: red');
   }
 
@@ -28,5 +29,10 @@ export class FreightListComponent implements OnInit, OnChanges {
 
   filterFreights(filterType){
     this.resultFreights = this.freights.filter(freight => {return filterType.includes(freight.Type)});
+  }
+
+  canModify(freightUserId : number) : boolean{
+    let authenticatedUser = this.authService.getAuthenticatedUser();
+    return authenticatedUser !== null ? authenticatedUser.id === freightUserId : false;
   }
 }

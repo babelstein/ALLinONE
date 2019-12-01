@@ -24,7 +24,7 @@
               Freight type: <p>{{freight.Type | freightType}}</p>
             </td>
             <td>
-              <button type="button" mdbBtn color="primary" class="btn blue-gradient btn-sm btn-block" mdbWavesEffect
+              <button *ngIf="canModify(freight.UserId)" type="button" mdbBtn color="primary" class="btn blue-gradient btn-sm btn-block" mdbWavesEffect
                 [routerLink]="[freight.Id]">Edit</button>
             </td>
           </tr>

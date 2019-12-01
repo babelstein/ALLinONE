@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { FreightType } from 'src/freights/Models/freightType';
+import { FreightType } from 'src/freights/models/freightType';
 
 @Pipe({ name: 'freightType' })
 

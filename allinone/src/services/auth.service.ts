@@ -19,6 +19,14 @@ export class AuthService{
         return this.isAuthenticated;
     }
 
+    getAuthenticatedUser() : IUser{
+        if (this.isAuthenticated){
+            return this.userDetails;
+        }else{
+            return null;
+        }
+    }
+
     logout() {
         this.isAuthenticated = false;
         this.userDetails = undefined;

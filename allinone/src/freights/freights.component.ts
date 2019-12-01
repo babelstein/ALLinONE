@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
-import { Freight } from './Models/freight';
-import { FreightsService } from 'src/Services/freights.service';
-import { FreightType } from './Models/freightType';
+import { Freight } from './models/freight';
+import { FreightsService } from 'src/services/freights.service';
+import { FreightType } from './models/freightType';
 
 @Component({
     templateUrl: 'freights.component.html'

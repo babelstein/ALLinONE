@@ -5,5 +5,6 @@ export class Freight {
     Name: string;
     Description: string;
     Type : FreightType;
-    ValidTo: Date
+    ValidTo: Date;
+    UserId: number
 }
