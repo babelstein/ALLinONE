@@ -1,5 +1,4 @@
-import { IPriceCalculator } from './IPriceCalculator';
-import { PriceCalculator } from 'src/shared/price-calculator';
+import { PriceCalculator, IPriceCalculator } from 'src/shared';
 
 export class SpecialPriceCalculator extends PriceCalculator implements IPriceCalculator{
     CalculcatePrice(basePrice: number): number {

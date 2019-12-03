@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from "@angular/core";
 import { FormGroup, FormControl } from '@angular/forms';
 import { AuthService } from 'src/services/auth.service';
 import { Router } from '@angular/router';
-import { IToastr, TOASTR_TOKEN } from 'src/shared/toastr.service';
+import { IToastr, TOASTR_TOKEN } from 'src/shared';
 
 @Component({
     templateUrl: 'details.component.html'

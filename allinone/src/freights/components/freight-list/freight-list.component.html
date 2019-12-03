@@ -18,11 +18,14 @@
             </td>
           </tr>
           <tr mdbTableCol [hidden]="!freight.hide" class="grey lighten-1 black-text">
-            <td colspan="2">
+            <td>
               Id: <p>{{freight.Id}}</p>
               Valid To: <p>{{freight.ValidTo | date:'dd-MM-yyyy'}}</p>
               Freight type: <p>{{freight.Type | freightType}}</p>
             </td>
+            <td>
+              <strong>Source:</strong><div [outerHTML]="freight.Source | freightLocalization"></div>
+              <strong>Destination:</strong><div [outerHTML]="freight.Destination | freightLocalization"></div>
             <td>
               <button *ngIf="canModify(freight.UserId)" type="button" mdbBtn color="primary" class="btn blue-gradient btn-sm btn-block" mdbWavesEffect
                 [routerLink]="[freight.Id]">Edit</button>
