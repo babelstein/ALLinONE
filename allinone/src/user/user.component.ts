@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IUser } from 'src/user/models/user';
 
 @Component({
     templateUrl: 'user.component.html'

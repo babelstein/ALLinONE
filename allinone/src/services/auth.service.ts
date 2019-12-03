@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { IUser } from 'src/user/models/user';
+import { UserType } from 'src/user/models/userType';
 
 @Injectable()
 export class AuthService{
@@ -12,7 +14,8 @@ export class AuthService{
                 firstName: "Domino",
                 lastName: "Bonczur",
                 id: 1,
-                username: "galakpizza"
+                username: "galakpizza",
+                userType: UserType.Employee
             }    
         }
 
