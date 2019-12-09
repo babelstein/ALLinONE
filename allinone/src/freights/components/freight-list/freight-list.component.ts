@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angu
 import { Freight } from '../../models/freight';
 import { FreightType } from 'src/freights/models/freightType';
 import { AuthService } from 'src/services/auth.service';
+import { PriceCalculator } from 'src/shared';
 
 @Component({
   selector: 'freight-list',
@@ -13,7 +14,8 @@ export class FreightListComponent implements OnInit, OnChanges {
   @Output() freightSelectedEvent = new EventEmitter<Freight>();
   resultFreights : Freight[] = [];
 
-  constructor(private authService: AuthService){
+  constructor(private authService: AuthService, private priceCalculator : PriceCalculator){
+    console.log(priceCalculator.CalculcatePrice(1));
     console.log('%cFreightListComponent - created', 'color: red');
   }
 

@@ -6,8 +6,9 @@ import { FreightsComponent } from './freights.component';
 import { CommonModule } from '@angular/common';
 import { FreightsRoutingModule } from './freights-routing.module';
 import { FreightExistsRouteActivator, CanEditFreightRouteActivator } from 'src/services/freights-route-activator.service';
-import { FreightTypePipe, FreightLocalizationPipe } from 'src/shared';
+import { FreightTypePipe, FreightLocalizationPipe, PriceCalculator, priceCalculatorFactory } from 'src/shared'
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { AuthService } from 'src/services/auth.service';
 
 @NgModule({
     declarations: [    
@@ -25,7 +26,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     ],
     providers: [
         FreightExistsRouteActivator,
-        CanEditFreightRouteActivator
+        CanEditFreightRouteActivator,
+        { provide: PriceCalculator, useFactory: priceCalculatorFactory, deps: [AuthService]}
     ],
     bootstrap: [FreightsComponent]
 })
