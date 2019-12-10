@@ -6,7 +6,7 @@ import { FreightsComponent } from './freights.component';
 import { CommonModule } from '@angular/common';
 import { FreightsRoutingModule } from './freights-routing.module';
 import { FreightExistsRouteActivator, CanEditFreightRouteActivator } from 'src/services/freights-route-activator.service';
-import { FreightTypePipe } from 'src/shared/freightType.pipe';
+import { FreightTypePipe, FreightLocalizationPipe, PriceCalculator, priceCalculatorFactory } from 'src/shared'
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
@@ -14,7 +14,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
         FreightsComponent,
         FreightDetailsComponent,
         FreightListComponent,
-        FreightTypePipe
+        FreightTypePipe,
+        FreightLocalizationPipe
     ],
     imports: [
         FormsModule,

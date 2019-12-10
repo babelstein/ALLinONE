@@ -1,6 +1,6 @@
 <div class="container">
     <div class="filters">
-        <div class="btn-group" mdbDropdown>
+        <div class="btn-group mr-2 h-25" mdbDropdown>
             <button mdbDropdownToggle type="button" size="sm" mdbBtn color="primary" class="dropdown-toggle waves-light"
                 mdbWavesEffect>
                 Filters
@@ -12,6 +12,9 @@
                         {{freightType | freightType}}</mdb-checkbox>
                 </ng-template>
             </div>
+        </div>
+        <div class="advancedSearch md-form w-25">
+            <input class="form-control form-control-sm mb-4" name="search" type="text" placeholder="Search...">
         </div>
     </div>
 </div>

@@ -7,7 +7,7 @@ import { Error404Component } from 'src/errors/404.component';
 import { NavbarComponent } from 'src/navbar/navbar.component';
 import { AuthService } from 'src/services/auth.service';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { TOASTR_TOKEN, IToastr } from 'src/shared/toastr.service';
+import { TOASTR_TOKEN, IToastr } from 'src/shared';
 
 let toastr: IToastr = window['toastr'];
 

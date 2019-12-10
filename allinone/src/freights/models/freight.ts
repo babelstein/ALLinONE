@@ -1,4 +1,5 @@
 import { FreightType } from './freightType';
+import { ILocalization } from './ILocalization';
 
 export class Freight {
     Id : number;
@@ -6,5 +7,7 @@ export class Freight {
     Description: string;
     Type : FreightType;
     ValidTo: Date;
-    UserId: number
+    UserId: number;
+    Source: ILocalization;
+    Destination: ILocalization;
 }
