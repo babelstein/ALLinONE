@@ -12,7 +12,7 @@
                         {{freightType | freightType}}</mdb-checkbox>
                 </ng-template>
             </div>
-            <button modal-trigger type="button" size="sm" mdbBtn color="primary" class="ml-2" mdbWavesEffect>Advanced filters</button>
+            <button modal-trigger="filtering-modal" type="button" size="sm" mdbBtn color="primary" class="ml-2" mdbWavesEffect>Advanced filters</button>
         </div>
         <div class="advancedSearch md-form w-25">
             <input class="form-control form-control-sm mb-4" name="search" type="text" placeholder="Search...">
@@ -23,7 +23,7 @@
 <freight-list [freights]="freights" [filterType]="freightTypeFilters" (freightSelectedEvent)="selectedFreight = $event">
 </freight-list>
 
-<simple-modal id="filters-modal" title="Advanced filtering">
+<modal elementId="filtering-modal" title="Advanced filtering">
     <div class="container">
         <ng-template ngFor let-freightType [ngForOf]="freightTypes()">
             <mdb-checkbox [checked]="freightTypeFilters.includes(freightType)" [default]="true"
@@ -41,4 +41,4 @@
     <select>
     </select>
     </div>
-</simple-modal>
+</modal>

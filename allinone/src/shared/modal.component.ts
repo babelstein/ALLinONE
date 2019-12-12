@@ -1,13 +1,19 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild, Inject } from '@angular/core';
+import { JQ_TOKEN } from './jquery.service';
 
 @Component({
-    selector: 'simple-modal',
+    selector: 'modal',
     template:`
-        <div class="modal-header">
-            <h4 class="modal-title">{{title}}</h4>
-        </div>
-        <div class="modal-body">
-            <ng-content></ng-content>
+        <div id={{elementId}} #modalContainer>
+            <div class="modal-header">
+                <h4 class="modal-title">{{title}}</h4>
+            </div>
+            <div class="modal-body">
+                <ng-content></ng-content>
+            </div>
+            <div class="modal-close">
+                <button type="button" mdbBtn color="error" (click)="close()">Close</button>
+            </div>
         </div>
     `,
     styles: [`
@@ -17,4 +23,13 @@ import { Component, Input } from '@angular/core';
 
 export class ModalComponent{
     @Input() title: string;
+    @Input() elementId: string;
+    @ViewChild('modalContainer') modalContainer : ElementRef
+
+    constructor(@Inject(JQ_TOKEN) private $: any){
+    }
+
+    close(){
+        this.$(this.modalContainer.nativeElement).modal('hide');
+    }
 }
