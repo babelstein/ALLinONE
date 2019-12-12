@@ -1,7 +1,11 @@
-export { FreightLocalizationPipe } from './freightLocalization.pipe';
-export { FreightTypePipe } from './freightType.pipe';
-export { IToastr, TOASTR_TOKEN } from './toastr.service';
-export { PriceCalculator } from './price-calculator';
-export { StandardPriceCalculator } from './standard-price-calculator';
-export { SpecialPriceCalculator } from './special-price-calculator';
-export { priceCalculatorFactory } from './price-calculator-provider';
+export * from './freightLocalization.pipe';
+export * from './freightType.pipe';
+export * from './toastr.service';
+export * from './price-calculator';
+export * from './standard-price-calculator';
+export * from './special-price-calculator';
+export * from './price-calculator-provider';
+export * from './modal.component';
+export * from './user-logged-in-route-activator.service';
+export * from './jquery.service';
+export * from './modal-trigger.directive';

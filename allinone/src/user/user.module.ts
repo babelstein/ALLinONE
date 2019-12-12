@@ -5,6 +5,7 @@ import { LoginComponent } from './login.component';
 import { UserDetailsComponent } from './details.component';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserLoggedInRouteActivator } from 'src/shared';
 
 @NgModule({
     declarations: [

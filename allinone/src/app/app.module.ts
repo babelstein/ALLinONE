@@ -7,9 +7,10 @@ import { Error404Component } from 'src/errors/404.component';
 import { NavbarComponent } from 'src/navbar/navbar.component';
 import { AuthService } from 'src/services/auth.service';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { TOASTR_TOKEN, IToastr } from 'src/shared';
+import { JQ_TOKEN, TOASTR_TOKEN, IToastr, UserLoggedInRouteActivator } from 'src/shared';
 
 let toastr: IToastr = window['toastr'];
+let jQuery = window['$'];
 
 @NgModule({
   declarations: [
@@ -20,11 +21,13 @@ let toastr: IToastr = window['toastr'];
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
   ],
   providers: [
     AuthService,
-    { provide: TOASTR_TOKEN, useValue: toastr }
+    UserLoggedInRouteActivator,
+    { provide: TOASTR_TOKEN, useValue: toastr },
+    { provide: JQ_TOKEN, useValue: jQuery}
   ],
   bootstrap: [AppComponent]
 })
