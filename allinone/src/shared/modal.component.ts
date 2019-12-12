@@ -17,7 +17,7 @@ import { JQ_TOKEN } from './jquery.service';
         </div>
     `,
     styles: [`
-        .modal-body{ hiehgt: 250px; overflow-y: scroll;}
+        :host {display: none;}
     `]
 })
 
@@ -30,6 +30,7 @@ export class ModalComponent{
     }
 
     close(){
-        this.$(this.modalContainer.nativeElement).modal('hide');
+        //this.modalContainer.nativeElement - reference to element from @viewchild
+        this.$.modal.close();
     }
 }

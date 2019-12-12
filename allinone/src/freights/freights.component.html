@@ -7,12 +7,13 @@
             </button>
             <div class="dropdown-menu dropdown-primary">
                 <ng-template ngFor let-freightType [ngForOf]="freightTypes()">
-                    <mdb-checkbox [checked]="freightTypeFilters.includes(freightType)" [default]="true"
+                    <mdb-checkbox [checked]="freightSearchFilters.freightTypeFilters.includes(freightType)" [default]="true"
                         (change)="$event.checked ? addFreightTypeFilter(freightType) : removeFreightTypeFilter(freightType)">
                         {{freightType | freightType}}</mdb-checkbox>
                 </ng-template>
             </div>
-            <button modal-trigger="filtering-modal" type="button" size="sm" mdbBtn color="primary" class="ml-2" mdbWavesEffect>Advanced filters</button>
+            <button modal-trigger="filtering-modal" type="button" size="sm" mdbBtn color="primary" class="ml-2"
+                mdbWavesEffect>Advanced filters</button>
         </div>
         <div class="advancedSearch md-form w-25">
             <input class="form-control form-control-sm mb-4" name="search" type="text" placeholder="Search...">
@@ -20,25 +21,37 @@
     </div>
 </div>
 
-<freight-list [freights]="freights" [filterType]="freightTypeFilters" (freightSelectedEvent)="selectedFreight = $event">
+<freight-list [freights]="freights" [filters]="freightSearchFilters" (freightSelectedEvent)="selectedFreight = $event">
 </freight-list>
 
 <modal elementId="filtering-modal" title="Advanced filtering">
     <div class="container">
-        <ng-template ngFor let-freightType [ngForOf]="freightTypes()">
-            <mdb-checkbox [checked]="freightTypeFilters.includes(freightType)" [default]="true"
-                (change)="$event.checked ? addFreightTypeFilter(freightType) : removeFreightTypeFilter(freightType)">
-                {{freightType | freightType}}</mdb-checkbox>
-        </ng-template>
-    </div>
-
-    <div class="container">
-    Source country:
-    <select>
-    </select>
-
-    Destination country:
-    <select>
-    </select>
+        <div class="row mb-4">
+            <div class="col-sm">
+                <ng-template ngFor let-freightType [ngForOf]="freightTypes()">
+                    <mdb-checkbox [checked]="freightSearchFilters.freightTypeFilters.includes(freightType)" [default]="true"
+                        (change)="$event.checked ? addFreightTypeFilter(freightType) : removeFreightTypeFilter(freightType)">
+                        {{freightType | freightType}}</mdb-checkbox>
+                </ng-template>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm">
+                <select class="browser-default custom-select" (change)="setFilterCountry($event.target.value, 'source')">
+                    <option value="" selected>Source country:</option>
+                    <ng-template ngFor let-srcCountry [ngForOf]="sourceCountries">
+                        <option [value]="srcCountry">{{srcCountry}}</option>
+                    </ng-template>
+                </select>
+            </div>
+            <div class="col-sm">
+                <select class="browser-default custom-select" (change)="setFilterCountry($event.target.value, 'destination')">
+                    <option value="" selected>Destination country:</option>
+                    <ng-template ngFor let-dstCountry [ngForOf]="destinationCountries">
+                        <option [value]="dstCountry">{{dstCountry}}</option>
+                    </ng-template>
+                </select>
+            </div>
+        </div>
     </div>
 </modal>
