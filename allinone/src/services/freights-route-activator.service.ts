@@ -46,3 +46,18 @@ export class CanEditFreightRouteActivator implements CanActivate {
         }
     }
 }
+
+@Injectable()
+export class IsUserAuthenticatedActivator implements CanActivate{
+
+    constructor(private authService : AuthService, private router: Router){}
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+        let authenticatedUser = this.authService.getAuthenticatedUser();
+        if (authenticatedUser !== null) {
+            return true;
+        }else{
+            this.router.navigate(['user','login'], { queryParams: { returnUrl: state.url }});
+        }
+    }
+}

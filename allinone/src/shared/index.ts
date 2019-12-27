@@ -9,3 +9,4 @@ export * from './modal.component';
 export * from './user-logged-in-route-activator.service';
 export * from './jquery.service';
 export * from './modal-trigger.directive';
+export * from './country';

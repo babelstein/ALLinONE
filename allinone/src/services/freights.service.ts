@@ -135,6 +135,13 @@ export class FreightsService {
     }
   }
 
+  public addFreight(freight: Freight) : Observable<Freight>{
+    freight.Id = this.freights.length + 1;
+    this.freights.push(freight);
+
+    return of(freight);
+  }
+
   getFreightsSourceCountries(): Observable<string[]> {
     return of(this.freights.map(freight => freight.Source.Country));
   }
