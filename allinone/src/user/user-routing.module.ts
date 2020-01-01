@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login.component';
 import { UserDetailsComponent } from './details.component';
 import { NgModule } from '@angular/core';
+import { UserLoggedInRouteActivator } from 'src/shared';
 
 const routes: Routes = [
     {
@@ -14,7 +15,8 @@ const routes: Routes = [
     },
     {
         path: 'details',
-        component: UserDetailsComponent
+        component: UserDetailsComponent,
+        canActivate: [UserLoggedInRouteActivator]
     }
 ]
 

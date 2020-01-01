@@ -11,6 +11,7 @@ import { JQ_TOKEN, TOASTR_TOKEN, IToastr, UserLoggedInRouteActivator } from 'src
 import { HttpClientModule } from '@angular/common/http';
 
 let toastr: IToastr = window['toastr'];
+let jQuery = window['$'];
 
 @NgModule({
   declarations: [
@@ -26,7 +27,9 @@ let toastr: IToastr = window['toastr'];
   ],
   providers: [
     AuthService,
-    { provide: TOASTR_TOKEN, useValue: toastr }
+    UserLoggedInRouteActivator,
+    { provide: TOASTR_TOKEN, useValue: toastr },
+    { provide: JQ_TOKEN, useValue: jQuery}
   ],
   bootstrap: [AppComponent]
 })

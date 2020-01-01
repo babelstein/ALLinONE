@@ -29,6 +29,8 @@
             <td>
               <button *ngIf="canModify(freight.userId)" type="button" mdbBtn color="primary" class="btn blue-gradient btn-sm btn-block" mdbWavesEffect
                 [routerLink]="[freight.id]">Edit</button>
+              <button type="button" mdbBtn color="primary" class="btn blue-gradient btn-sm btn-block" mdbWavesEffect
+                [routerLink]="[freight.id]">Show more</button>
             </td>
           </tr>
         </ng-template>

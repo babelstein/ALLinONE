@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/services/auth.service';
 
 @Component({
@@ -13,15 +13,18 @@ import { AuthService } from 'src/services/auth.service';
 export class LoginComponent implements OnInit {
     loginFormGroup : FormGroup;
     invalidCredentials: boolean = false;
+    returnUrl: string;
+
+    constructor(private router: Router, private authService : AuthService, private route: ActivatedRoute){}
 
     ngOnInit(): void {
         this.loginFormGroup = new FormGroup({
             login: new FormControl('', Validators.required),
             password: new FormControl('', Validators.required)
         });
-    }
 
-    constructor(private router: Router, private authService : AuthService){}
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    }
 
     cancel(){
         this.router.navigate(['']);
@@ -33,7 +36,7 @@ export class LoginComponent implements OnInit {
             this.invalidCredentials = false;
             if(this.authService.login(this.loginFormGroup.value))
             {
-                this.router.navigate(['freights']);
+                this.router.navigateByUrl(this.returnUrl);
             }
             else{
                 this.invalidCredentials = true;
