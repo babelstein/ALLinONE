@@ -1,0 +1,46 @@
+<div class="container">
+    <form class="text-center border border-light" [formGroup]="freightFormGroup" (ngSubmit)="addFreight()">
+        <div class="input-group">
+            <input class="form-control mb-4" formControlName="Name" placeholder="Name" type="text">
+            <input class="form-control mb-4" formControlName="Description" placeholder="Description" type="text">
+            <select class="form-control mb-4" formControlName="Type">
+                <option disabled selected hidden value="">Freight Type</option>
+                <ng-template ngFor let-freightType [ngForOf]="freightTypes()">
+                    <option [value]="freightType">{{freightType | freightType}}</option>
+                </ng-template>
+            </select>
+            <div class="md-form">
+                <input type="date" class="form-control mb-4" formControlName="ValidTo" placeholder="Valid To" mdbInput>
+            </div>
+        </div>
+        <span>Source</span>
+        <div class="input-group" formGroupName="Source">
+            <select class="form-control mb-4" formControlName="Country">
+                <option disabled selected hidden value="">Country</option>
+                <ng-template ngFor let-country [ngForOf]="countries()">
+                    <option [value]="country.key">{{country.value}}</option>
+                </ng-template>
+            </select>
+            <input class="form-control mb-4" formControlName="PostCode" placeholder="PostCode" type="text">
+            <input class="form-control mb-4" formControlName="Addres1" placeholder="Addres 1" type="text">
+            <input class="form-control mb-4" formControlName="Addres2" placeholder="Addres 2" type="text">
+            <input class="form-control mb-4" formControlName="Description" placeholder="Description" type="text">
+        </div>
+        <span>Destination</span>
+        <div class="input-group" formGroupName="Destination">
+            <select class="form-control mb-4" formControlName="Country">
+                <option disabled selected hidden value="">Country</option>
+                <ng-template ngFor let-country [ngForOf]="countries()">
+                    <option [value]="country.key">{{country.value}}</option>
+                </ng-template>
+            </select>
+            <input class="form-control mb-4" formControlName="PostCode" placeholder="PostCode" type="text">
+            <input class="form-control mb-4" formControlName="Addres1" placeholder="Addres 1" type="text">
+            <input class="form-control mb-4" formControlName="Addres2" placeholder="Addres 2" type="text">
+            <input class="form-control mb-4" formControlName="Description" placeholder="Description" type="text">
+        </div>
+
+        <button mdbBtn class="btn blue-gradient" gradient="peach" rounded="true" mdbWavesEffect type="submit"
+            [disabled]="!freightFormGroup.valid">Add</button>
+    </form>
+</div>

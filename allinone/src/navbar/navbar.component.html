@@ -7,8 +7,14 @@
             <li class="nav-item active waves-light" mdbWavesEffect>
                 <a class="nav-link">Home</a>
             </li>
-            <li class="nav-item waves-light" mdbWavesEffect>
-                <a class="nav-link" [routerLink]="['freights']">Freights</a>
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                    mdbWavesEffect>
+                    Freights<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['freights']">Search</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect [routerLink]="['freights','new']">Add new</a>
+                </div>
             </li>
         </ul>
 

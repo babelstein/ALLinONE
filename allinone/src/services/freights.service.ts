@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, of} from 'rxjs';
-import { Freight } from 'src/freights/models/freight';
-import { FreightType } from 'src/freights/models/freightType';
+import { Observable, of } from 'rxjs';
+import { ILocalization, FreightType, Freight } from 'src/freights/models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FreightsService {
-
   private freights: Freight[] = [
     {
       Id: 1,
@@ -121,22 +119,35 @@ export class FreightsService {
     }
   ]
 
-  public getRows() : Observable<Freight[]>{
+  public getRows(): Observable<Freight[]> {
     return of(this.freights);
   }
 
-  public Get(id:number) : Observable<Freight>{
+  public Get(id: number): Observable<Freight> {
     return of(this.freights.find(row => row.Id === id));
   }
 
-  public updateFreight(freight : Freight){
-    for(let i = 0; i < this.freights.length; i++)
-    {
-      if(this.freights[i].Id == freight.Id)
-      {
+  public updateFreight(freight: Freight) {
+    for (let i = 0; i < this.freights.length; i++) {
+      if (this.freights[i].Id == freight.Id) {
         this.freights[i] = freight;
       }
     }
+  }
+
+  public addFreight(freight: Freight) : Observable<Freight>{
+    freight.Id = this.freights.length + 1;
+    this.freights.push(freight);
+
+    return of(freight);
+  }
+
+  getFreightsSourceCountries(): Observable<string[]> {
+    return of(this.freights.map(freight => freight.Source.Country));
+  }
+
+  getFreightsDestinationCountries(): Observable<string[]> {
+    return of(this.freights.map(freight => freight.Destination.Country));
   }
 
   constructor() { }

@@ -1,8 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
-import { Freight } from '../../models/freight';
-import { FreightType } from 'src/freights/models/freightType';
 import { AuthService } from 'src/services/auth.service';
 import { PriceCalculator, priceCalculatorFactory } from 'src/shared';
+import { FreightSearchFilter, Freight } from 'src/freights/models';
 
 @Component({
   selector: 'freight-list',
@@ -11,7 +10,7 @@ import { PriceCalculator, priceCalculatorFactory } from 'src/shared';
 })
 export class FreightListComponent implements OnInit, OnChanges {
   @Input() freights : Freight[];
-  @Input() filterType : FreightType[];
+  @Input() filters : FreightSearchFilter;
   @Output() freightSelectedEvent = new EventEmitter<Freight>();
   resultFreights : Freight[] = [];
 
@@ -26,12 +25,20 @@ export class FreightListComponent implements OnInit, OnChanges {
 
   ngOnChanges(){
     if(this.freights){
-      this.filterFreights(this.filterType);
+      this.filterFreights(this.filters);
     }
   }
 
-  filterFreights(filterType){
-    this.resultFreights = this.freights.filter(freight => {return filterType.includes(freight.Type)});
+  filterFreights(filters: FreightSearchFilter){
+     let resultSet = this.freights.filter(freight => {return filters.freightTypeFilters.includes(freight.Type)});
+     if(filters.sourceCountry !== ""){
+       resultSet = resultSet.filter(freight => {return freight.Source.Country === filters.sourceCountry});
+     }
+     if(filters.destinationCountry !== ""){
+      resultSet = resultSet.filter(freight => {return freight.Destination.Country === filters.destinationCountry});
+    }
+
+     this.resultFreights = resultSet;
   }
 
   canModify(freightUserId : number) : boolean{

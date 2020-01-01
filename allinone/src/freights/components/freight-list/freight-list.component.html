@@ -28,7 +28,9 @@
               <strong>Destination:</strong><div [outerHTML]="freight.Destination | freightLocalization"></div>
             <td>
               <button *ngIf="canModify(freight.UserId)" type="button" mdbBtn color="primary" class="btn blue-gradient btn-sm btn-block" mdbWavesEffect
-                [routerLink]="[freight.Id]">Edit</button>
+                [routerLink]="['edit',freight.Id]">Edit</button>
+              <button type="button" mdbBtn color="primary" class="btn blue-gradient btn-sm btn-block" mdbWavesEffect
+                [routerLink]="[freight.Id]">Show more</button>
             </td>
           </tr>
         </ng-template>
