@@ -1,7 +1,7 @@
 export interface ILocalization{
-    Country: string;
-    PostCode: string;
-    Addres1: string;
+    country: string;
+    postCode: string;
+    addres1: string;
     Addres2: string;
-    Description: string;
+    description: string;
 }

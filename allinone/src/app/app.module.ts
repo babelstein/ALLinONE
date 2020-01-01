@@ -7,7 +7,8 @@ import { Error404Component } from 'src/errors/404.component';
 import { NavbarComponent } from 'src/navbar/navbar.component';
 import { AuthService } from 'src/services/auth.service';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { TOASTR_TOKEN, IToastr } from 'src/shared';
+import { JQ_TOKEN, TOASTR_TOKEN, IToastr, UserLoggedInRouteActivator } from 'src/shared';
+import { HttpClientModule } from '@angular/common/http';
 
 let toastr: IToastr = window['toastr'];
 
@@ -20,7 +21,8 @@ let toastr: IToastr = window['toastr'];
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MDBBootstrapModule.forRoot()
+    HttpClientModule,
+    MDBBootstrapModule.forRoot(),
   ],
   providers: [
     AuthService,

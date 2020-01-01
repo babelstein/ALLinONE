@@ -30,8 +30,16 @@ export class FreightListComponent implements OnInit, OnChanges {
     }
   }
 
-  filterFreights(filterType){
-    this.resultFreights = this.freights.filter(freight => {return filterType.includes(freight.Type)});
+  filterFreights(filters: FreightSearchFilter){
+     let resultSet = this.freights.filter(freight => {return filters.freightTypeFilters.includes(freight.type)});
+     if(filters.sourceCountry !== ""){
+       resultSet = resultSet.filter(freight => {return freight.source.country === filters.sourceCountry});
+     }
+     if(filters.destinationCountry !== ""){
+      resultSet = resultSet.filter(freight => {return freight.destination.country === filters.destinationCountry});
+    }
+
+     this.resultFreights = resultSet;
   }
 
   canModify(freightUserId : number) : boolean{

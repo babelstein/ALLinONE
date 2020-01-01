@@ -8,6 +8,7 @@ import { FreightsRoutingModule } from './freights-routing.module';
 import { FreightExistsRouteActivator, CanEditFreightRouteActivator } from 'src/services/freights-route-activator.service';
 import { FreightTypePipe, FreightLocalizationPipe, PriceCalculator, priceCalculatorFactory } from 'src/shared'
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [    

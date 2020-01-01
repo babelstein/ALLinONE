@@ -5,11 +5,11 @@ import { ILocalization } from 'src/freights/models/ILocalization';
 
 export class FreightLocalizationPipe implements PipeTransform {
     transform(value: ILocalization): string {
-        return `<p>${value.Country}</p>
-        <p>${value.PostCode}</p>
-        <p>${value.Addres1}</p>
+        return `<p>${value.country}</p>
+        <p>${value.postCode}</p>
+        <p>${value.addres1}</p>
         <p>${value.Addres2}</p>
-        <p>${value.Description}</p>
+        <p>${value.description}</p>
         `
     }
 }

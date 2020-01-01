@@ -39,7 +39,7 @@ export class CanEditFreightRouteActivator implements CanActivate {
         this.freightService.Get(+route.params['id']).subscribe((freight) => { this._freight = freight })
         let authenticatedUser = this.authService.getAuthenticatedUser();
         if (authenticatedUser !== null && this._freight !== null) {
-            return authenticatedUser.id === this._freight.UserId
+            return authenticatedUser.id === this._freight.userId
         }
         else {
             this.router.navigate(['freights']);

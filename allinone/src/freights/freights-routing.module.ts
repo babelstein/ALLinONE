@@ -12,7 +12,7 @@ const routes : Routes = [
     {
         path: ':id',
         component: FreightDetailsComponent,
-        canActivate: [FreightExistsRouteActivator,CanEditFreightRouteActivator]
+        canActivate: [FreightExistsRouteActivator] //,CanEditFreightRouteActivator]
     }
 ]
 

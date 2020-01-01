@@ -1,15 +1,15 @@
 <div class="container d-flex justify-content-center">
     <div class="col-6" *ngIf="freight">
-        <h2 class="text-center">{{freight.Name | titlecase }}</h2>
-        <p class="text-center">{{freight.Description}}</p>
-        <p class="text-center">{{freight.ValidTo | date:'dd-MM-yyyy'}}</p>
+        <h2 class="text-center">{{freight.name | titlecase }}</h2>
+        <p class="text-center">{{freight.description}}</p>
+        <p class="text-center">{{freight.validTo | date:'dd-MM-yyyy'}}</p>
 
         <div class="input-group input-group-sm mb-3">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm">Name</span>
             </div>
             <input type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-sm" [(ngModel)]="freight.Name" placeholder="Enter name..." />
+                aria-describedby="inputGroup-sizing-sm" [(ngModel)]="freight.name" placeholder="Enter name..." />
         </div>
 
         <div class="input-group input-group-sm mb-3">
@@ -17,7 +17,7 @@
                 <span class="input-group-text" id="inputGroup-sizing-sm">Description</span>
             </div>
             <input type="text" class="form-control" aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-sm" [(ngModel)]="freight.Description"
+                aria-describedby="inputGroup-sizing-sm" [(ngModel)]="freight.description"
                 placeholder="Enter decription..." />
         </div>
 

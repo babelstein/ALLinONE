@@ -18,10 +18,35 @@ export class FreightsComponent {
       console.log('%cFreightsComponent - created', 'color: red');
     }
 
-    ngOnInit(){
-      console.log('%cFreightsComponent - initialized', 'color: yellow');
-      this.freightsService.getRows().subscribe((freights) => {this.freights = freights;});
-      this.freightTypeFilters = Object.values(FreightType).filter(a => !Object.keys(FreightType).includes(a));
+  ngOnInit() {
+    console.log('%cFreightsComponent - initialized', 'color: yellow');
+    this.setState();
+  }
+
+  private setState() {
+    this.freightSearchFilters = new FreightSearchFilter();
+    this.freightSearchFilters.freightTypeFilters = Object.values(FreightType).filter(a => !Object.keys(FreightType).includes(a));
+    this.freightSearchFilters.destinationCountry = "";
+    this.freightSearchFilters.sourceCountry = "";
+
+    this.freightsService.getRows().subscribe((freights) => {this.freights = freights});
+    this.freightsService.getFreightsSourceCountries().subscribe((sourceCountries) => this.sourceCountries = sourceCountries);
+    this.freightsService.getFreightsDestinationCountries().subscribe((destinationCountries) => this.destinationCountries = destinationCountries);
+  }
+
+  freightTypes(): FreightType[] {
+    return Object.values(FreightType).filter(a => !Object.keys(FreightType).includes(a));
+  }
+
+  addFreightTypeFilter(type: FreightType) {
+    if (!this.freightSearchFilters.freightTypeFilters.includes(type)) {
+      var filtersDeepCopy = JSON.parse(JSON.stringify(this.freightSearchFilters));
+
+      let tempTable = filtersDeepCopy.freightTypeFilters.slice(0);
+      tempTable.push(type);
+      filtersDeepCopy.freightTypeFilters = tempTable;
+
+      this.freightSearchFilters = filtersDeepCopy;
     }
 
     freightTypes() : FreightType[]{
