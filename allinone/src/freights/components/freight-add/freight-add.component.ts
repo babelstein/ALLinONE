@@ -50,11 +50,11 @@ export class FreightAddComponent {
 
     addFreight() {
         let freightToAdd = this.freightFormGroup.value as Freight;
-        freightToAdd.Type = +freightToAdd.Type;
-        freightToAdd.UserId = this.authService.getAuthenticatedUser().id;
+        freightToAdd.type = +freightToAdd.type;
+        freightToAdd.userId = this.authService.getAuthenticatedUser().id;
         this.freightService.addFreight(freightToAdd).subscribe((freight) => {
             if(freight !== null){
-                this.router.navigate(['freights',freight.Id]);
+                this.router.navigate(['freights',freight.id]);
             }
         });
     }

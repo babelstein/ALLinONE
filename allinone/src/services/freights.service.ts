@@ -32,6 +32,11 @@ export class FreightsService {
       .pipe(catchError(this.handleError<Freight>("updateFreight")));
   }
 
+  public addFreight(freight: Freight){
+    return this.httpClient.put<Freight>("/api/freights", freight)
+      .pipe(catchError(this.handleError<Freight>("addFreight")));
+  }
+
   getFreightsSourceCountries(): Observable<string[]> {
     return this.getRows().pipe(map(freights => freights.map(freight => freight.source.country)));   
   }
