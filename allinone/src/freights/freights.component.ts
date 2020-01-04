@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { FreightsService } from 'src/services/freights.service';
 import { Freight, FreightType, FreightSearchFilter } from './models';
-import { Observable, Subscriber } from 'rxjs';
+import { Observable, Subscriber, Subscription } from 'rxjs';
 
 @Component({
   templateUrl: 'freights.component.html'
@@ -17,6 +17,7 @@ export class FreightsComponent {
   public searchFilters$: Observable<FreightSearchFilter>;
   public sourceCountries: String[];
   public destinationCountries: String[];
+  private subscriptions = new Subscription();
 
   constructor(private freightsService: FreightsService) {
     console.log('%cFreightsComponent - created', 'color: red');
@@ -27,26 +28,32 @@ export class FreightsComponent {
     this.setState();
   }
 
+  ngOnDestroy(){
+    this.subscriptions.unsubscribe();
+  }
+
   private setState() {
     this.searchFilters = new FreightSearchFilter();
-    this.searchFilters.freightTypeFilters = Object.values(FreightType).filter(a => !Object.keys(FreightType).includes(a)) as FreightType[];
+    this.searchFilters.freightTypeFilters = Object.keys(FreightType);
     this.searchFilters.destinationCountry = "";
     this.searchFilters.sourceCountry = "";
 
     this.searchFilters$ = new Observable<FreightSearchFilter>(e => this.searchFiltersEmiter = e);
 
-    this.freightsService.getRows().subscribe((freights) => {
-      this.freights = freights
-      this.freightsService.getFreightsSourceCountries().subscribe((sourceCountries) => this.sourceCountries = sourceCountries);
-      this.freightsService.getFreightsDestinationCountries().subscribe((destinationCountries) => {
-        this.destinationCountries = destinationCountries;
-        this.searchFiltersEmiter.next(this.searchFilters);
-      });
-    });
+    this.subscriptions.add(
+      this.freightsService.getRows().subscribe((freights) => {
+        this.freights = freights
+        this.sourceCountries = freights.map(freight => freight.source.country)
+        this.destinationCountries = freights.map(freight => freight.destination.country);
+        setTimeout(() => {
+          this.searchFiltersEmiter.next(this.searchFilters);
+        })
+      })
+    );
   }
 
-  freightTypes(): FreightType[] {
-    return Object.values(FreightType).filter(a => !Object.keys(FreightType).includes(a)) as FreightType[];
+  freightTypes(): string[] {
+    return Object.keys(FreightType);
   }
 
   addFreightTypeFilter(type: FreightType) {

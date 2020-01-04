@@ -38,8 +38,8 @@ export class FreightAddComponent {
         })
     }
 
-    freightTypes(): FreightType[] {
-        return Object.values(FreightType).filter(a => !Object.keys(FreightType).includes(a));
+    freightTypes(): string[] {
+        return Object.keys(FreightType);
     }
 
     countries(): any[] {

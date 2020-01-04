@@ -5,7 +5,7 @@ export class Freight {
     id : number;
     name: string;
     description: string;
-    type : string;
+    type : FreightType;
     validTo: Date;
     userId: number;
     source: ILocalization;

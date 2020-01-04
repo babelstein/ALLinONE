@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import { AuthService } from 'src/services/auth.service';
 import { PriceCalculator, priceCalculatorFactory } from 'src/shared';
 import { FreightSearchFilter, Freight } from 'src/freights/models';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'freight-list',
@@ -14,6 +14,7 @@ export class FreightListComponent implements OnInit{
   @Input() filters : Observable<FreightSearchFilter>;
   @Output() freightSelectedEvent = new EventEmitter<Freight>();
   resultFreights : Freight[] = [];
+  private subscriptions = new Subscription();
 
   constructor(private authService: AuthService, private priceCalculator : PriceCalculator){
     console.log(priceCalculator.CalculcatePrice(1));
@@ -22,19 +23,27 @@ export class FreightListComponent implements OnInit{
 
   ngOnInit() {
     console.log('%cFreightListComponent - initialized', 'color: yellow');
-    this.filters.subscribe((updatedFilters) => this.filterFreights(updatedFilters));
+    this.subscriptions.add(
+      this.filters.subscribe((updatedFilters) => this.filterFreights(updatedFilters))
+    );
+   }
+
+  ngOnDestroy(){
+    this.subscriptions.unsubscribe();
   }
 
   filterFreights(filters: FreightSearchFilter){
-     let resultSet = this.freights.filter(freight => {return filters.freightTypeFilters.includes(freight.type)});
-     if(filters.sourceCountry !== ""){
-       resultSet = resultSet.filter(freight => {return freight.source.country === filters.sourceCountry});
+    if(this.freights){
+      let resultSet = this.freights.filter(freight => {return filters.freightTypeFilters.includes(freight.type)});
+      if(filters.sourceCountry !== ""){
+        resultSet = resultSet.filter(freight => {return freight.source.country === filters.sourceCountry});
+      }
+      if(filters.destinationCountry !== ""){
+       resultSet = resultSet.filter(freight => {return freight.destination.country === filters.destinationCountry});
      }
-     if(filters.destinationCountry !== ""){
-      resultSet = resultSet.filter(freight => {return freight.destination.country === filters.destinationCountry});
+     
+      this.resultFreights = resultSet;
     }
-    
-     this.resultFreights = resultSet;
   }
 
   canModify(freightUserId : number) : boolean{

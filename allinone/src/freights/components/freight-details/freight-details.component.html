@@ -4,17 +4,17 @@
         <p class="text-center">{{freight.description}}</p>
         <p class="text-center">{{freight.validTo | date:'dd-MM-yyyy'}}</p>
 <div class="container">
-    <h1>{{freight.Name}}</h1>
-    <h2>{{freight.Description}}</h2>
+    <h1>{{freight.name}}</h1>
+    <h2>{{freight.description}}</h2>
 
     <div>
-        Id: <p>{{freight.Id}}</p>
-        Valid To: <p>{{freight.ValidTo | date:'dd-MM-yyyy'}}</p>
-        Freight type: <p>{{freight.Type | freightType}}</p>
+        Id: <p>{{freight.id}}</p>
+        Valid To: <p>{{freight.validTo | date:'dd-MM-yyyy'}}</p>
+        Freight type: <p>{{freight.type | freightType}}</p>
     </div>
     
     <strong>Source:</strong>
-    <div [outerHTML]="freight.Source | freightLocalization"></div>
+    <div [outerHTML]="freight.source | freightLocalization"></div>
     <strong>Destination:</strong>
-    <div [outerHTML]="freight.Destination | freightLocalization"></div>
+    <div [outerHTML]="freight.destination | freightLocalization"></div>
 </div>

@@ -4,26 +4,20 @@ import { Observable } from 'rxjs';
 import { FreightsService as FreightsRowService, FreightsService } from './freights.service';
 import { AuthService } from './auth.service';
 import { Freight } from 'src/freights/models/freight';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable()
-export class FreightExistsRouteActivator implements CanActivate{
-    constructor(private freightService: FreightsRowService, private router: Router){
+export class FreightExistsRouteActivator implements CanActivate {
+    constructor(private freightService: FreightsRowService, private router: Router) {
 
     }
 
-    canActivate(route:ActivatedRouteSnapshot, state: RouterStateSnapshot)
-    : boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        let rowExists = false;
-        this.freightService.Get(+route.params['id']).subscribe((row) => {rowExists = !!row})
-        
-        if(rowExists){
-            debugger;
-            return true;
-        }
-        else{
-            debugger;
-            this.router.navigate(['404']);
-        }
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
+        : boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+        return this.freightService.Get(+route.params['id'])
+        .pipe(map(data => {
+            return !!data
+        }));
     }
 }
 
@@ -50,16 +44,16 @@ export class CanEditFreightRouteActivator implements CanActivate {
 }
 
 @Injectable()
-export class IsUserAuthenticatedActivator implements CanActivate{
+export class IsUserAuthenticatedActivator implements CanActivate {
 
-    constructor(private authService : AuthService, private router: Router){}
+    constructor(private authService: AuthService, private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         let authenticatedUser = this.authService.getAuthenticatedUser();
         if (authenticatedUser !== null) {
             return true;
-        }else{
-            this.router.navigate(['user','login'], { queryParams: { returnUrl: state.url }});
+        } else {
+            this.router.navigate(['user', 'login'], { queryParams: { returnUrl: state.url } });
         }
     }
 }

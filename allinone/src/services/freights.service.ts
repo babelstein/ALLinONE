@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ILocalization, FreightType, Freight } from 'src/freights/models';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,10 @@ export class FreightsService {
 
   public getRows(): Observable<Freight[]> {
     return this.httpClient.get<Freight[]>('/api/freights')
-      .pipe(catchError(this.handleError<Freight[]>("getFreights", [])));
+      .pipe(
+        shareReplay(3),
+        catchError(this.handleError<Freight[]>("getFreights", []))
+      );
   }
 
   private handleError<T>(operation = "operation", result? : T){
