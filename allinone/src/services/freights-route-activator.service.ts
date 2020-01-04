@@ -14,12 +14,14 @@ export class FreightExistsRouteActivator implements CanActivate{
     canActivate(route:ActivatedRouteSnapshot, state: RouterStateSnapshot)
     : boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         let rowExists = false;
-        this.freightService.Get(+route.params['id']).subscribe((row) => { rowExists = !!row})
+        this.freightService.Get(+route.params['id']).subscribe((row) => {rowExists = !!row})
         
         if(rowExists){
+            debugger;
             return true;
         }
         else{
+            debugger;
             this.router.navigate(['404']);
         }
     }

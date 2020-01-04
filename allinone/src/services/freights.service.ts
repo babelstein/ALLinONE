@@ -28,12 +28,12 @@ export class FreightsService {
   }
 
   public updateFreight(freight: Freight) {    
-    return this.httpClient.post<Freight>('/api/freights/'+freight.id,freight)
+    return this.httpClient.put<Freight>('/api/freights/'+freight.id,freight)
       .pipe(catchError(this.handleError<Freight>("updateFreight")));
   }
 
   public addFreight(freight: Freight){
-    return this.httpClient.put<Freight>("/api/freights", freight)
+    return this.httpClient.post<Freight>("/api/freights", freight)
       .pipe(catchError(this.handleError<Freight>("addFreight")));
   }
 

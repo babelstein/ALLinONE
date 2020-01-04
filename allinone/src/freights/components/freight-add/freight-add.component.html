@@ -1,43 +1,43 @@
 <div class="container">
     <form class="text-center border border-light" [formGroup]="freightFormGroup" (ngSubmit)="addFreight()">
         <div class="input-group">
-            <input class="form-control mb-4" formControlName="Name" placeholder="Name" type="text">
-            <input class="form-control mb-4" formControlName="Description" placeholder="Description" type="text">
-            <select class="form-control mb-4" formControlName="Type">
+            <input class="form-control mb-4" formControlName="name" placeholder="Name" type="text">
+            <input class="form-control mb-4" formControlName="description" placeholder="Description" type="text">
+            <select class="form-control mb-4" formControlName="type">
                 <option disabled selected hidden value="">Freight Type</option>
                 <ng-template ngFor let-freightType [ngForOf]="freightTypes()">
                     <option [value]="freightType">{{freightType | freightType}}</option>
                 </ng-template>
             </select>
             <div class="md-form">
-                <input type="date" class="form-control mb-4" formControlName="ValidTo" placeholder="Valid To" mdbInput>
+                <input type="date" class="form-control mb-4" formControlName="validTo" placeholder="Valid To" mdbInput>
             </div>
         </div>
         <span>Source</span>
-        <div class="input-group" formGroupName="Source">
-            <select class="form-control mb-4" formControlName="Country">
+        <div class="input-group" formGroupName="source">
+            <select class="form-control mb-4" formControlName="country">
                 <option disabled selected hidden value="">Country</option>
                 <ng-template ngFor let-country [ngForOf]="countries()">
                     <option [value]="country.key">{{country.value}}</option>
                 </ng-template>
             </select>
-            <input class="form-control mb-4" formControlName="PostCode" placeholder="PostCode" type="text">
-            <input class="form-control mb-4" formControlName="Addres1" placeholder="Addres 1" type="text">
-            <input class="form-control mb-4" formControlName="Addres2" placeholder="Addres 2" type="text">
-            <input class="form-control mb-4" formControlName="Description" placeholder="Description" type="text">
+            <input class="form-control mb-4" formControlName="postCode" placeholder="PostCode" type="text">
+            <input class="form-control mb-4" formControlName="addres1" placeholder="Addres 1" type="text">
+            <input class="form-control mb-4" formControlName="addres2" placeholder="Addres 2" type="text">
+            <input class="form-control mb-4" formControlName="description" placeholder="Description" type="text">
         </div>
         <span>Destination</span>
-        <div class="input-group" formGroupName="Destination">
-            <select class="form-control mb-4" formControlName="Country">
+        <div class="input-group" formGroupName="destination">
+            <select class="form-control mb-4" formControlName="country">
                 <option disabled selected hidden value="">Country</option>
                 <ng-template ngFor let-country [ngForOf]="countries()">
                     <option [value]="country.key">{{country.value}}</option>
                 </ng-template>
             </select>
-            <input class="form-control mb-4" formControlName="PostCode" placeholder="PostCode" type="text">
-            <input class="form-control mb-4" formControlName="Addres1" placeholder="Addres 1" type="text">
-            <input class="form-control mb-4" formControlName="Addres2" placeholder="Addres 2" type="text">
-            <input class="form-control mb-4" formControlName="Description" placeholder="Description" type="text">
+            <input class="form-control mb-4" formControlName="postCode" placeholder="PostCode" type="text">
+            <input class="form-control mb-4" formControlName="addres1" placeholder="Addres 1" type="text">
+            <input class="form-control mb-4" formControlName="addres2" placeholder="Addres 2" type="text">
+            <input class="form-control mb-4" formControlName="description" placeholder="Description" type="text">
         </div>
 
         <button mdbBtn class="btn blue-gradient" gradient="peach" rounded="true" mdbWavesEffect type="submit"

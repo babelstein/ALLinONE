@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { FreightsService } from 'src/services/freights.service';
 import { Freight, FreightType, FreightSearchFilter } from './models';
+import { Observable, Subscriber } from 'rxjs';
 
 @Component({
   templateUrl: 'freights.component.html'
@@ -11,7 +12,9 @@ export class FreightsComponent {
   title = 'allinone';
   public freights: Freight[];
   public selectedFreight: Freight;
-  public freightSearchFilters: FreightSearchFilter;
+  private searchFiltersEmiter: Subscriber<FreightSearchFilter>;
+  public searchFilters: FreightSearchFilter;
+  public searchFilters$: Observable<FreightSearchFilter>;
   public sourceCountries: String[];
   public destinationCountries: String[];
 
@@ -25,54 +28,50 @@ export class FreightsComponent {
   }
 
   private setState() {
-    this.freightSearchFilters = new FreightSearchFilter();
-    this.freightSearchFilters.freightTypeFilters = Object.values(FreightType).filter(a => !Object.keys(FreightType).includes(a));
-    this.freightSearchFilters.destinationCountry = "";
-    this.freightSearchFilters.sourceCountry = "";
+    this.searchFilters = new FreightSearchFilter();
+    this.searchFilters.freightTypeFilters = Object.values(FreightType).filter(a => !Object.keys(FreightType).includes(a)) as FreightType[];
+    this.searchFilters.destinationCountry = "";
+    this.searchFilters.sourceCountry = "";
 
-    this.freightsService.getRows().subscribe((freights) => {this.freights = freights});
-    this.freightsService.getFreightsSourceCountries().subscribe((sourceCountries) => this.sourceCountries = sourceCountries);
-    this.freightsService.getFreightsDestinationCountries().subscribe((destinationCountries) => this.destinationCountries = destinationCountries);
+    this.searchFilters$ = new Observable<FreightSearchFilter>(e => this.searchFiltersEmiter = e);
+
+    this.freightsService.getRows().subscribe((freights) => {
+      this.freights = freights
+      this.freightsService.getFreightsSourceCountries().subscribe((sourceCountries) => this.sourceCountries = sourceCountries);
+      this.freightsService.getFreightsDestinationCountries().subscribe((destinationCountries) => {
+        this.destinationCountries = destinationCountries;
+        this.searchFiltersEmiter.next(this.searchFilters);
+      });
+    });
   }
 
   freightTypes(): FreightType[] {
-    return Object.values(FreightType).filter(a => !Object.keys(FreightType).includes(a));
+    return Object.values(FreightType).filter(a => !Object.keys(FreightType).includes(a)) as FreightType[];
   }
 
   addFreightTypeFilter(type: FreightType) {
-    if (!this.freightSearchFilters.freightTypeFilters.includes(type)) {
-      var filtersDeepCopy = JSON.parse(JSON.stringify(this.freightSearchFilters));
-
-      let tempTable = filtersDeepCopy.freightTypeFilters.slice(0);
-      tempTable.push(type);
-      filtersDeepCopy.freightTypeFilters = tempTable;
-
-      this.freightSearchFilters = filtersDeepCopy;
+    if (!this.searchFilters.freightTypeFilters.includes(type)) {
+      this.searchFilters.freightTypeFilters.push(type);
+      this.searchFiltersEmiter.next(this.searchFilters);
     }
   }
 
   removeFreightTypeFilter(type: FreightType) {
-    var filtersDeepCopy = JSON.parse(JSON.stringify(this.freightSearchFilters));
-
-    filtersDeepCopy.freightTypeFilters = filtersDeepCopy.freightTypeFilters.filter(filterType => filterType !== type)
-
-    this.freightSearchFilters = filtersDeepCopy;
+    this.searchFilters.freightTypeFilters = this.searchFilters.freightTypeFilters.filter(filterType => filterType !== type);
+    this.searchFiltersEmiter.next(this.searchFilters);
   }
 
   setFilterCountry(countryCode: string, freightLocalizationType: string) {
-    var filtersDeepCopy = JSON.parse(JSON.stringify(this.freightSearchFilters));
-
     switch (freightLocalizationType) {
       case "source":
-          filtersDeepCopy.sourceCountry = countryCode;
+        this.searchFilters.sourceCountry = countryCode;
         break;
       case "destination":
-          filtersDeepCopy.destinationCountry = countryCode;
+        this.searchFilters.destinationCountry = countryCode;
         break;
       default:
         break;
     }
-
-    this.freightSearchFilters = filtersDeepCopy;
+    this.searchFiltersEmiter.next(this.searchFilters);
   }
 }

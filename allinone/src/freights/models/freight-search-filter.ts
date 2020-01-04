@@ -1,7 +1,7 @@
 import { FreightType } from '.';
 
 export class FreightSearchFilter{
-    freightTypeFilters: FreightType[];
+    freightTypeFilters: string[];
     sourceCountry : string;
     destinationCountry : string;
     sortBy: string;

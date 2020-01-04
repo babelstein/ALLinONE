@@ -1,7 +1,7 @@
 export enum FreightType{
-    'Curtainsider',
-    'Cooler',
-    'Isotherm',
-    'WalkingFloor',
-    'DumpTruck'
+    Curtainsider = 'Curtainsider',
+    Cooler = 'Cooler',
+    Isotherm = 'Isotherm',
+    WalkingFloor = 'WalkingFloor',
+    DumpTruck = 'DumpTruck'
 }

@@ -7,7 +7,7 @@
             </button>
             <div class="dropdown-menu dropdown-primary">
                 <ng-template ngFor let-freightType [ngForOf]="freightTypes()">
-                    <mdb-checkbox [checked]="freightSearchFilters.freightTypeFilters.includes(freightType)" [default]="true"
+                    <mdb-checkbox [checked]="searchFilters.freightTypeFilters.includes(freightType)" [default]="true"
                         (change)="$event.checked ? addFreightTypeFilter(freightType) : removeFreightTypeFilter(freightType)">
                         {{freightType | freightType}}</mdb-checkbox>
                 </ng-template>
@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<freight-list [freights]="freights" [filters]="freightSearchFilters" (freightSelectedEvent)="selectedFreight = $event">
+<freight-list [freights]="freights" [filters]="searchFilters$" (freightSelectedEvent)="selectedFreight = $event">
 </freight-list>
 
 <modal elementId="filtering-modal" title="Advanced filtering">
@@ -29,7 +29,7 @@
         <div class="row mb-4">
             <div class="col-sm">
                 <ng-template ngFor let-freightType [ngForOf]="freightTypes()">
-                    <mdb-checkbox [checked]="freightSearchFilters.freightTypeFilters.includes(freightType)" [default]="true"
+                    <mdb-checkbox [checked]="searchFilters.freightTypeFilters.includes(freightType)" [default]="true"
                         (change)="$event.checked ? addFreightTypeFilter(freightType) : removeFreightTypeFilter(freightType)">
                         {{freightType | freightType}}</mdb-checkbox>
                 </ng-template>

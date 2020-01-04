@@ -10,20 +10,52 @@ namespace server.Controllers
     [Route("api/[controller]")]
     public class FreightsController : ControllerBase
     {
+        private ICollection<Freight> _freights;
+        public FreightsController()
+        {
+            _freights = GetFreights();
+        }
+
         [HttpGet]
         public IEnumerable<Freight> Get()
         {
             Task.Delay(250);
-            return GetFreights();
+            return _freights;
         }
 
         [HttpGet("{id}")]
-        public Freight Get(int id){
-          Task.Delay(250);
-          return GetFreights().Where(a => a.Id == id).FirstOrDefault();
+        public Freight Get(int id)
+        {
+            Task.Delay(250);
+            return _freights.Where(a => a.Id == id).FirstOrDefault();
         }
 
-        private IEnumerable<Freight> GetFreights()
+        [HttpPost]
+        public Freight Post(Freight freight)
+        {
+            Task.Delay(250);
+            freight.Id = _freights.Count() + 1;
+            _freights.Add(freight);
+            return freight;
+        }
+
+
+        [HttpPut("{id}")]
+        public ActionResult Put(Freight freight)
+        {
+            Task.Delay(250);
+            var freightToUpdate = _freights.FirstOrDefault(a => a.Id == freight.Id);
+            if (freightToUpdate != null)
+            {
+                freightToUpdate = freight;
+            }
+            else{
+              return NotFound();
+            }
+            return Ok(freight);
+        }
+
+        private ICollection<Freight> GetFreights()
         {
             return new List<Freight>(){
                 new Freight(){

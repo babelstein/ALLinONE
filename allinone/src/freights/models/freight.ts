@@ -5,8 +5,8 @@ export class Freight {
     id : number;
     name: string;
     description: string;
-    type : FreightType;
-    //validTo: Date;
+    type : string;
+    validTo: Date;
     userId: number;
     source: ILocalization;
     destination: ILocalization;
